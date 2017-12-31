@@ -1,9 +1,18 @@
 import json
 import os
+import sys
 import time
 from googlerpc import rpc
 
-file = os.path.expandvars(os.path.join('%AppData%\Google Play Music Desktop Player\json_store\playback.json'))
+if sys.platform == "linux":
+    file = os.path.expanduser('~')+"/.config/Google Play Music Desktop Player/json_store/playback.json"
+elif sys.platform == "win32":
+    file = os.path.expandvars(os.path.join('%AppData%\Google Play Music Desktop Player\json_store\playback.json'))
+elif sys.platform == "darwin":
+    os.path.expanduser('~')+"/Library/Application Support/Google Play Music Desktop Player/json_store/playback.json"
+else:
+    print("Unsupported OS, sorry")
+    exit()
 
 rpc = rpc.DiscordRPC('397050772807745536', verbose=False)
 rpc.start()
