@@ -23,6 +23,9 @@ def update_presence():
 
     payload = {
         "details": "",
+        "timestamps": {
+            "start": int(time.time()),
+        },
         "assets": {
             'large_text': 'Google Play Music',
             'large_image': 'google_play'
