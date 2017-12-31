@@ -5,7 +5,7 @@ Used tools:
 - Discord RPC for Python | https://github.com/GiovanniMCMXCIX/PyDiscordRPC
 
 ```
-NOTE: Only works for Windows currently
+NOTE: Only works for Windows & Linux currently
 ```
 
 ## Requirements
