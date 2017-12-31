@@ -4,12 +4,19 @@ import sys
 import time
 from googlerpc import rpc
 
+try:
+    from argparse import ArgumentParser as ArgParser
+except ImportError:
+    from optparse import OptionParser as ArgParser
+
+__version__ = "1.0.4.1"
+
 if sys.platform == "linux":
-    file = os.path.expanduser('~')+"/.config/Google Play Music Desktop Player/json_store/playback.json"
+    file = os.path.expanduser('~') + "/.config/Google Play Music Desktop Player/json_store/playback.json"
 elif sys.platform == "win32":
     file = os.path.expandvars(os.path.join('%AppData%\Google Play Music Desktop Player\json_store\playback.json'))
 elif sys.platform == "darwin":
-    os.path.expanduser('~')+"/Library/Application Support/Google Play Music Desktop Player/json_store/playback.json"
+    os.path.expanduser('~') + "/Library/Application Support/Google Play Music Desktop Player/json_store/playback.json"
 else:
     print("Unsupported OS, sorry")
     exit()
@@ -56,7 +63,41 @@ def update_presence():
     rpc.send_rich_presence(payload)
 
 
+def version():
+    print(f"GoogleRPC {__version__}")
+    sys.exit(0)
+
+
+def parse_args():
+    description = (
+        'A Google Play Music song displayer for Discord\n'
+        '--------------------------------------------------------------------------\n'
+        'https://github.com/AlexFlipnote/googlerpc')
+
+    parser = ArgParser(description=description)
+    # Give optparse.OptionParser an `add_argument` method for
+    # compatibility with argparse.ArgumentParser
+    try:
+        parser.add_argument = parser.add_option
+    except AttributeError:
+        pass
+
+    parser.add_argument('--version', action='store_true', help='Show the version number and exit')
+
+    options = parser.parse_args()
+    if isinstance(options, tuple):
+        args = options[0]
+    else:
+        args = options
+    return args
+
+
 def main():
+    args = parse_args()
+
+    if args.version:
+        version()
+
     print("Loaded DiscordRPC")
     print("Loaded Google Play Music song info")
     print("----------------------------------------")
