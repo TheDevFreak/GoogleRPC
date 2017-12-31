@@ -9,7 +9,7 @@ try:
 except ImportError:
     from optparse import OptionParser as ArgParser
 
-__version__ = "1.0.4.1"
+__version__ = "1.0.5"
 
 if sys.platform == "linux":
     file = os.path.expanduser('~') + "/.config/Google Play Music Desktop Player/json_store/playback.json"
@@ -26,7 +26,7 @@ rpc.start()
 
 
 def getplaying():
-    with open(file) as f:
+    with open(file, encoding='utf-8') as f:
         data = json.load(f)
         return data
 
