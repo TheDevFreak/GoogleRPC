@@ -2,7 +2,7 @@
 A Google Play Music song displayer for Discord
 
 Used tools:
-Discord RPC for Python - https://github.com/GiovanniMCMXCIX/PyDiscordRPC
+- Discord RPC for Python | https://github.com/GiovanniMCMXCIX/PyDiscordRPC
 
 ```
 NOTE: Only works for Windows currently
