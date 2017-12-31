@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='googlerpc',
     packages=['googlerpc'],
-    version='1.0.0',
+    version='1.0.1',
     description='A Google Play Music song displayer for Discord',
     author='AlexFlipnote',
     author_email='root@alexflipnote.xyz',

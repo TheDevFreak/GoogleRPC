@@ -23,9 +23,6 @@ def update_presence():
 
     payload = {
         "details": "",
-        "timestamps": {
-            "start": int(time.time()),
-        },
         "assets": {
             'large_text': 'Google Play Music',
             'large_image': 'google_play'
@@ -42,7 +39,7 @@ def update_presence():
         payload["state"] = artist
         payload["timestamps"]["start"] = int(time.time() - (progress * 0.001))
     else:
-        payload["details"] = f"Paused on {song} by {artist}"
+        payload["details"] = f"❚❚ Paused"
 
     rpc.send_rich_presence(payload)
 
