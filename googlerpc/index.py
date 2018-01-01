@@ -9,7 +9,7 @@ try:
 except ImportError:
     from optparse import OptionParser as ArgParser
 
-__version__ = "1.0.5"
+__version__ = "1.0.5.2"
 
 if sys.platform == "linux":
     file = os.path.expanduser('~') + "/.config/Google Play Music Desktop Player/json_store/playback.json"
@@ -54,8 +54,8 @@ def update_presence():
     is_playing = result["playing"]
 
     if is_playing:
-        payload["details"] = song
-        payload["state"] = artist
+        payload["details"] = f"🎵 {song}"
+        payload["state"] = f"👤 {artist}"
         payload["timestamps"]["start"] = int(time.time() - (progress * 0.001))
     else:
         payload["details"] = f"❚❚ Paused"
