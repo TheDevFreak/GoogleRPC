@@ -9,7 +9,7 @@ try:
 except ImportError:
     from optparse import OptionParser as ArgParser
 
-__version__ = "1.0.5.2"
+__version__ = "1.0.5.3"
 
 if sys.platform == "linux":
     file = os.path.expanduser('~') + "/.config/Google Play Music Desktop Player/json_store/playback.json"
@@ -35,36 +35,39 @@ def update_presence():
     try:
         result = getplaying()
     except Exception as e:
-        print("Exception:", e)
+        print("Logs: ", e)
 
-    payload = {
-        "details": "",
-        "timestamps": {
-            "start": int(time.time()),
-        },
-        "assets": {
-            'large_text': 'Google Play Music',
-            'large_image': 'google_play'
-        },
-    }
+    try:
+        payload = {
+            "details": "",
+            "timestamps": {
+                "start": int(time.time()),
+            },
+            "assets": {
+                'large_text': 'Google Play Music',
+                'large_image': 'google_play'
+            },
+        }
 
-    song = result["song"]["title"]
-    artist = result["song"]["artist"]
-    progress = result["time"]["current"]
-    is_playing = result["playing"]
+        song = result["song"]["title"]
+        artist = result["song"]["artist"]
+        progress = result["time"]["current"]
+        is_playing = result["playing"]
 
-    if is_playing:
-        payload["details"] = f"🎵 {song}"
-        payload["state"] = f"👤 {artist}"
-        payload["timestamps"]["start"] = int(time.time() - (progress * 0.001))
-    else:
-        payload["details"] = f"❚❚ Paused"
+        if is_playing:
+            payload["details"] = f"🎵 {song}"
+            payload["state"] = f"👤 {artist}"
+            payload["timestamps"]["start"] = int(time.time() - (progress * 0.001))
+        else:
+            payload["details"] = f"❚❚ Paused"
 
-    rpc.send_rich_presence(payload)
+        rpc.send_rich_presence(payload)
+    except Exception as e:
+        print("Logs: ", e)
 
 
 def version():
-    print(f"GoogleRPC {__version__}")
+    print("GoogleRPC ", __version__)
     sys.exit(0)
 
 
