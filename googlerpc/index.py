@@ -22,7 +22,10 @@ else:
     exit()
 
 rpc = rpc.DiscordRPC('397050772807745536', verbose=False)
-rpc.start()
+try:
+    rpc.start()
+except:
+    pass
 
 
 def getplaying():
